@@ -1,19 +1,15 @@
-import ListEmployeeFunctionalComponent from '../components/ListEmployeeFunctionalComponent';
 import React from 'react'
+import ListEmployeeFunctionalComponent from '../components/ListEmployeeFunctionalComponent';
 
+export const EmployeeServiceFunctional=()=> {
+    const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/v1/employees";
 
-
-
-const EmployeeServiceFunctional=()=> {
-    const employeeBaseApiUrl = "http://localhost:8080/api/v1/employees";
-
-    console.log(employeeBaseApiUrl)
+    console.log(EMPLOYEE_API_BASE_URL)
     
   return (
     <div>
-        <ListEmployeeFunctionalComponent employeeBaseApiUrl={employeeBaseApiUrl}/>
+        <ListEmployeeFunctionalComponent EMPLOYEE_API_BASE_URL={EMPLOYEE_API_BASE_URL}/>
     </div>
   )
 }
 
-export default EmployeeServiceFunctional

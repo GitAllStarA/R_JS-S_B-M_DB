@@ -11,19 +11,20 @@ import ListEmployeeFunctionalComponent from "./components/ListEmployeeFunctional
 
 function App() {
   return (
-    <div id="appDiv" className="container">
-      <ListEmployeeFunctionalComponent/>
-      {/* <Router>
+    <div id="appDiv" >
+      {/* <ListEmployeeFunctionalComponent/> */}
+       <Router>
           <HeaderComponent />
           <div className="contianer">
           <Routes>
-            <Route path="/" exact element={<ListEmployeeComponent />} />
-            <Route path="/employees" element={<ListEmployeeComponent/>}/>
+            <Route path="/" exact element={<ListEmployeeFunctionalComponent />} />
+            <Route path="/employees" element={<ListEmployeeFunctionalComponent/>}/>
             <Route path="/addEmployee" exact element={<CreateEmployeeComponent/>}/>
+            <Route path="/createEmployee" exact element={<CreateEmployeeComponent/>}/>
           </Routes>
           </div>
           <FooterComponent />
-      </Router> */}
+      </Router>   
     </div>
   );
 }
