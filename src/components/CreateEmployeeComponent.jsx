@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
@@ -11,12 +12,12 @@ function CreateEmployeeComponent() {
     firstName: "",
     lastName: "",
     emailId: "",
-  }
+  };
 
   const [data, setData] = useState(initialValues);
 
   const changeFirstNameHandler = (event) => {
-    setData({...data, [event.target.name]: event.target.value});
+    setData({ ...data, [event.target.name]: event.target.value });
   };
 
   // const changeLastNameHandler = (e) => {
@@ -28,14 +29,29 @@ function CreateEmployeeComponent() {
 
   const saveEmployee = (e) => {
     e.preventDefault();
-  let employee = {
+    let employee = {
       firstName: data.firstName,
       lastName: data.lastName,
       emailId: data.emailId,
     };
-   console.log("employee => " + JSON.stringify(employee));
+    console.log("employee => " + JSON.stringify(employee));
+    createEmployee(employee);
   };
 
+  const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/v1/employees";
+
+  //saving employee using post call
+  const createEmployee = (employee) => {
+    axios.post(EMPLOYEE_API_BASE_URL, employee).then((response) => {
+      if (response.status == 200) {
+        console.log(response.status);
+        navigate("/");
+      } else {
+        navigate("/addEmployee");
+        console.log(response.status);
+      }
+    });
+  };
 
   const cancelEmployeSubmut = () => {
     navigate("/");
@@ -43,7 +59,11 @@ function CreateEmployeeComponent() {
 
   return (
     <div className="container" id="listEmployee">
-      <button className="btn btn-primary" style={{marginBottom: "10px"}} onClick={goBack}>
+      <button
+        className="btn btn-primary"
+        style={{ marginBottom: "10px" }}
+        onClick={goBack}
+      >
         Back
       </button>
 

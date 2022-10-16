@@ -1,18 +1,33 @@
 import axios from "axios";
 import { useEffect } from "react";
+import { useContext } from "react";
 import { useState } from "react";
 import { Routers,Route, useNavigate } from "react-router-dom";
+import { EmployeeServiceFunctional } from "../services/EmployeeServiceFunctional";
+import { shareAPIS } from "../contexts/shareAPISContext";
 import "./style.css"
 
-const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/v1/employees";
+ const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/v1/employees";
+
 
 export const ListEmployeeFunctionalComponent = () => {
+
+
   const [state, setState] = useState([]);
 
   const navigate = useNavigate();
 
+ 
+ // console.log(EMPLOYEE_API_BASE_URL)
+
+
+  //context of api service
+  const {data, setData} = useContext(shareAPIS);
+
+  console.log("-> api from context "+data)
+
   const getData = async () => {
-    await axios.get(EMPLOYEE_API_BASE_URL).then((promdata) => {
+    await axios.get(data).then((promdata) => {
       setState(promdata.data);
     });
   };
