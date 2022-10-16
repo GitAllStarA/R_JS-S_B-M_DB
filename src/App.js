@@ -8,6 +8,7 @@ import ListEmployeeFunctionalComponent from "./components/ListEmployeeFunctional
 import { shareAPIS as shareAPISContext } from "./contexts/shareAPISContext";
 import { useState } from "react";
 import UpdateEmployeeComponent from "./components/UpdateEmployeeComponent";
+import ViewEmployeeComponent from "./components/ViewEmployeeComponent";
 
 function App() {
   const [data, setData] = useState("http://localhost:8080/api/v1/employees");
@@ -42,8 +43,8 @@ function App() {
             {/* <Route
               path="/updateEmployee/:id"
               exact
-              element={<UpdateEmployeeComponent />} */}
-            />
+              element={<UpdateEmployeeComponent />}  />*/}
+           <Route path="/viewEmployee/:id" exact element={<ViewEmployeeComponent/>}/>
           </Routes>
         </div>
         <FooterComponent />
