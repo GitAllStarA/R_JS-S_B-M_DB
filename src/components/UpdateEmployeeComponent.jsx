@@ -15,6 +15,7 @@ function UpdateEmployeeComponent({ userIdParam }) {
   const idx = useParams();
 
   const initialValues = {
+    id: null,
     firstName: "",
     lastName: "",
     emailId: "",

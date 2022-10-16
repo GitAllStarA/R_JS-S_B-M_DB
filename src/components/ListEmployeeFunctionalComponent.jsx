@@ -33,7 +33,7 @@ export const ListEmployeeFunctionalComponent = () => {
 
   // navigate to update employee page onClick editEmployee
   const editEmployee = (id) => {
-    navigate(`/updateEmployee/${id}`);
+    navigate(`/addEmployee/${id}`);
   };
 
   const DisplayData = state.map((info, idx) => {
@@ -62,7 +62,7 @@ export const ListEmployeeFunctionalComponent = () => {
       <button
         className="btn btn-primary"
         onClick={() => {
-          navigate("/addEmployee");
+          navigate("/addEmployee/-1");
         }}
       >
         Add Employee

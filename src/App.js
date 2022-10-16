@@ -30,7 +30,7 @@ function App() {
               element={<ListEmployeeFunctionalComponent />}
             />
             <Route
-              path="/addEmployee"
+              path="/addEmployee/:id"
               exact
               element={<CreateEmployeeComponent />}
             />
@@ -39,10 +39,10 @@ function App() {
               exact
               element={<CreateEmployeeComponent />}
             />
-            <Route
+            {/* <Route
               path="/updateEmployee/:id"
               exact
-              element={<UpdateEmployeeComponent />}
+              element={<UpdateEmployeeComponent />} */}
             />
           </Routes>
         </div>

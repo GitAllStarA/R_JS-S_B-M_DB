@@ -1,6 +1,6 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import "./style.css";
 function CreateEmployeeComponent() {
   const navigate = useNavigate();
@@ -9,6 +9,7 @@ function CreateEmployeeComponent() {
   };
 
   const initialValues = {
+    id: null,
     firstName: "",
     lastName: "",
     emailId: "",
@@ -16,16 +17,15 @@ function CreateEmployeeComponent() {
 
   const [data, setData] = useState(initialValues);
 
+  //page loading state
+  const [loading, setLoading] = useState(false);
+
+  // user id from feteched from url
+  const idx = useParams();
+
   const changeFirstNameHandler = (event) => {
     setData({ ...data, [event.target.name]: event.target.value });
   };
-
-  // const changeLastNameHandler = (e) => {
-  //   setData({ lastName: e.target.value });
-  // };
-  // const changeEmailId = (e) => {
-  //   setData({ emailId: e.target.value });
-  // };
 
   const saveEmployee = (e) => {
     e.preventDefault();
@@ -35,7 +35,15 @@ function CreateEmployeeComponent() {
       emailId: data.emailId,
     };
     console.log("employee => " + JSON.stringify(employee));
-    createEmployee(employee);
+    if (idx.id == -1) {
+      console.log("create employee");
+
+      createEmployee(employee);
+    } else {
+      console.log("update employee");
+
+      updateEmployee(e);
+    }
   };
 
   const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/v1/employees";
@@ -57,6 +65,68 @@ function CreateEmployeeComponent() {
     navigate("/");
   };
 
+  //getting employee
+  useEffect(() => {
+    if (idx.id == -1) {
+      return;
+    } else {
+      getEmployeeById(idx.id);
+    }
+  }, []);
+
+  // get employee by id
+  const getEmployeeById = async (id) => {
+    setLoading(true);
+    await axios.get(EMPLOYEE_API_BASE_URL + "/" + id).then((resp) => {
+      let employee = resp.data;
+      console.log("promise useEffect : " + employee);
+      setData({
+        ...data,
+        id: idx.id,
+        firstName: employee.firstName,
+        lastName: employee.lastName,
+        emailId: employee.emailId,
+      });
+      console.log("updated state data : " + data);
+      setLoading(false);
+    });
+  };
+
+  //update employee
+  const updateEmployee = (e) => {
+    e.preventDefault();
+    let employee = {
+      id: data.id,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      emailId: data.emailId,
+    };
+    console.log("employee => " + JSON.stringify(employee));
+    const employee_id = employee.id;
+    updateEmployeeStoreInDB(employee_id, employee);
+    navigate("/");
+  };
+
+  const updateEmployeeStoreInDB = (empObjId, empObj) => {
+    const empAPI = EMPLOYEE_API_BASE_URL + "/" + empObjId;
+    console.log(empAPI);
+
+    axios.put(empAPI, empObj).then((resp) => {
+      if (resp.status != 200) {
+        console.log(resp);
+        navigate("/updateEmployee");
+      }
+    });
+  };
+
+  const conditionalFormTitle = () => {
+    if (idx.id == -1) {
+      return <h3 className="text-center"> Add Employee</h3>;
+    } else  {
+      return <h3 className="text-center"> Update Employee </h3>;
+    }
+  };
+
   return (
     <div className="container" id="listEmployee">
       <button
@@ -70,7 +140,7 @@ function CreateEmployeeComponent() {
       {/* <h1 id="listEmployee">Fill in the form to add Employee</h1> */}
       <div className="row">
         <div className="card col-md-6 offset-md-3 offset-md-3">
-          <h3 className="text-center">Add Employee Form</h3>
+          {conditionalFormTitle()}
           <div className="card-body">
             <form>
               <div className="form-group">
