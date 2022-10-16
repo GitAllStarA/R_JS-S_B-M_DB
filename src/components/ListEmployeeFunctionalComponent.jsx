@@ -2,29 +2,24 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useContext } from "react";
 import { useState } from "react";
-import { Routers,Route, useNavigate } from "react-router-dom";
+import { Routers, Route, useNavigate } from "react-router-dom";
 import { EmployeeServiceFunctional } from "../services/EmployeeServiceFunctional";
 import { shareAPIS } from "../contexts/shareAPISContext";
-import "./style.css"
+import "./style.css";
 
- const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/v1/employees";
-
+const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/v1/employees";
 
 export const ListEmployeeFunctionalComponent = () => {
-
-
   const [state, setState] = useState([]);
 
   const navigate = useNavigate();
 
- 
- // console.log(EMPLOYEE_API_BASE_URL)
-
+  // console.log(EMPLOYEE_API_BASE_URL)
 
   //context of api service
-  const {data, setData} = useContext(shareAPIS);
+  const { data, setData } = useContext(shareAPIS);
 
-  console.log("-> api from context "+data)
+  console.log("-> api from context " + data);
 
   const getData = async () => {
     await axios.get(data).then((promdata) => {
@@ -36,30 +31,51 @@ export const ListEmployeeFunctionalComponent = () => {
     getData();
   }, []);
 
+  // navigate to update employee page onClick editEmployee
+  const editEmployee = (id) => {
+    navigate(`/updateEmployee/${id}`);
+  };
+
   const DisplayData = state.map((info, idx) => {
     return (
       <tr>
+        <td key={idx}>{info.id}</td>
         <td key={idx}>{info.firstName}</td>
         <td key={idx}>{info.lastName}</td>
         <td key={idx}>{info.emailId}</td>
+        <td>
+          <button
+            onClick={() => {
+              editEmployee(info.id);
+            }}
+            className="btn btn-info"
+          >
+            Update
+          </button>
+        </td>
       </tr>
     );
   });
 
-
-
   return (
     <div className="container" id="listEmployee">
-      <button className="btn btn-primary" onClick={()=>{navigate("/addEmployee")}}>
+      <button
+        className="btn btn-primary"
+        onClick={() => {
+          navigate("/addEmployee");
+        }}
+      >
         Add Employee
       </button>
-      <h1 id ="listEmployee" ></h1>
-      <table  className="table table-striped table-bordered">
+      <h1 id="listEmployee"></h1>
+      <table className="table table-striped table-bordered">
         <thead>
           <tr>
+            <th>ID</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email Id</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>{DisplayData}</tbody>
