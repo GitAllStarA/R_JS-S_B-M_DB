@@ -35,7 +35,7 @@ function CreateEmployeeComponent() {
       emailId: data.emailId,
     };
     console.log("employee => " + JSON.stringify(employee));
-    if (idx.id == -1) {
+    if (idx.id === "_add") {
       console.log("create employee");
 
       createEmployee(employee);
@@ -67,7 +67,7 @@ function CreateEmployeeComponent() {
 
   //getting employee
   useEffect(() => {
-    if (idx.id == -1) {
+    if (idx.id == "_add") {
       return;
     } else {
       getEmployeeById(idx.id);
@@ -120,7 +120,7 @@ function CreateEmployeeComponent() {
   };
 
   const conditionalFormTitle = () => {
-    if (idx.id == -1) {
+    if (idx.id == "_add") {
       return <h3 className="text-center"> Add Employee</h3>;
     } else  {
       return <h3 className="text-center"> Update Employee </h3>;

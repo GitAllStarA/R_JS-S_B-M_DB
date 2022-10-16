@@ -62,7 +62,7 @@ export const ListEmployeeFunctionalComponent = () => {
       <button
         className="btn btn-primary"
         onClick={() => {
-          navigate("/addEmployee/-1");
+          navigate("/addEmployee/_add");
         }}
       >
         Add Employee
