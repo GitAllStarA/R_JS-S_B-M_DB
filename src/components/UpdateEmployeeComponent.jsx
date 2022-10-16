@@ -12,7 +12,7 @@ function UpdateEmployeeComponent({ userIdParam }) {
   };
 
   // user id from feteched from url
-  const  idx  = useParams();
+  const idx = useParams();
 
   const initialValues = {
     firstName: "",
@@ -39,25 +39,42 @@ function UpdateEmployeeComponent({ userIdParam }) {
       emailId: data.emailId,
     };
     console.log("employee => " + JSON.stringify(employee));
+    const employee_id = employee.id;
+    updateEmployeeStoreInDB(employee_id, employee);
+    navigate("/")
+    
   };
 
-  const cancelEmployeSubmut = () => {
+  const updateEmployeeStoreInDB = (empObjId, empObj) => {
+    const empAPI = EMPLOYEE_API_BASE_URL + "/" + empObjId;
+    console.log(empAPI)
+
+    axios.put(empAPI,empObj).then((resp)=>{
+      if(resp.status !=200){
+        console.log(resp);
+        navigate("/updateEmployee");
+      }
+    })
+    
+  };
+
+  const cancelEmployeSubmit = () => {
     navigate("/");
   };
 
   useEffect(() => {
     getEmployeeById(idx.id);
-  },[]);
+  }, []);
 
   // get employee by id
   const getEmployeeById = async (id) => {
-    setLoading(true)
-  await  axios.get(EMPLOYEE_API_BASE_URL + "/" + id).then((resp) => {
+    setLoading(true);
+    await axios.get(EMPLOYEE_API_BASE_URL + "/" + id).then((resp) => {
       let employee = resp.data;
       console.log("promise useEffect : " + employee);
       setData({
         ...data,
-        id: 1,
+        id: idx.id,
         firstName: employee.firstName,
         lastName: employee.lastName,
         emailId: employee.emailId,
@@ -130,18 +147,9 @@ function UpdateEmployeeComponent({ userIdParam }) {
                 <button
                   style={{ marginLeft: "10px", marginTop: "10px" }}
                   className="btn btn-danger"
-                  onClick={cancelEmployeSubmut}
+                  onClick={cancelEmployeSubmit}
                 >
                   cancel
-                </button>
-
-                <button
-                  className="btn btn-success"
-                  onClick={() => {
-                    getEmployeeById();
-                  }}
-                >
-                  check the response
                 </button>
               </div>
             </form>
