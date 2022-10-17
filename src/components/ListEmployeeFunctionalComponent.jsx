@@ -2,15 +2,14 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useContext } from "react";
 import { useState } from "react";
-import { Routers, Route, useNavigate, useParams } from "react-router-dom";
-import { EmployeeServiceFunctional } from "../services/EmployeeServiceFunctional";
+import { useNavigate } from "react-router-dom";
 import { shareAPIS } from "../contexts/shareAPISContext";
 import "./style.css";
 
 const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/v1/employees";
 
 export const ListEmployeeFunctionalComponent = () => {
-  
+
   //data from api
   const [state, setState] = useState([]);
 

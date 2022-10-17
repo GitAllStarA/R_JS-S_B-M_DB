@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./style.css";
 
-function UpdateEmployeeComponent({ userIdParam }) {
+function UpdateEmployeeComponent() {
   const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/v1/employees";
   const navigate = useNavigate();
   const goBack = () => {

@@ -1,6 +1,6 @@
 import "./App.css";
 // Router enables the navigation among views of various components in a React Application, allows changing the browser URL, and keeps the UI in sync with the URL
-import { Route, Routes, useParams } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import HeaderComponent from "./components/HeaderComponent";
 import FooterComponent from "./components/FooterComponent";
 import CreateEmployeeComponent from "./components/CreateEmployeeComponent";
