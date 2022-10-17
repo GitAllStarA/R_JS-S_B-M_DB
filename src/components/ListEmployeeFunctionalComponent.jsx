@@ -10,6 +10,7 @@ import "./style.css";
 const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/v1/employees";
 
 export const ListEmployeeFunctionalComponent = () => {
+  
   //data from api
   const [state, setState] = useState([]);
 
