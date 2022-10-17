@@ -43,7 +43,15 @@ function ViewEmployeeComponent() {
   return (
     <div>
       <div className="card col-md-6 offset-md-3">
-        <div style={{ marginBottom: "10px" }} className="contianer">
+        <h3 className="text-center"> View Employee Details</h3>
+        <div className="card-body">
+          <div className="row">
+            <label className="text-center">First Name: {data.firstName} </label>
+            <label className="text-center">Last Name: {data.lastName} </label>
+            <label className="text-center">Email ID: {data.emailId} </label>
+            <label className="text-center">ID: {data.id} </label>
+          </div>
+          <div style={{ marginBottom: "10px" }} className="contianer">
           <button
             onClick={() => {
               navigate("/");
@@ -53,14 +61,6 @@ function ViewEmployeeComponent() {
             back
           </button>
         </div>
-        <h3 className="text-center"> View Employee Details</h3>
-        <div className="card-body">
-          <div className="row">
-            <label className="text-center">First Name: {data.firstName} </label>
-            <label className="text-center">Last Name: {data.lastName} </label>
-            <label className="text-center">Email ID: {data.emailId} </label>
-            <label className="text-center">ID: {data.id} </label>
-          </div>
         </div>
       </div>
     </div>
