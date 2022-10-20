@@ -53,6 +53,7 @@ class ListEmployeeComponent extends Component {
                 <th>Employee Last Name</th>
                 <th>Employee emailId</th>
                 <th>Actions</th>
+                <th>Notes</th>
               </tr>
             </thead>
             <tbody>
