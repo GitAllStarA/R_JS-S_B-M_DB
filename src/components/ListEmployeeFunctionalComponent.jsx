@@ -75,7 +75,7 @@ export const ListEmployeeFunctionalComponent = () => {
             Update
           </button>
 
-          <button
+          {/* <button
             onClick={() => {
               deleteEmployee(info.id);
             }}
@@ -83,7 +83,7 @@ export const ListEmployeeFunctionalComponent = () => {
             style={{ marginLeft: "10px" }}
           >
             Delete
-          </button>
+          </button> */}
 
           <button
             onClick={() => {
