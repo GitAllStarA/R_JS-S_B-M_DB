@@ -11,7 +11,7 @@ import UpdateEmployeeComponent from "./components/UpdateEmployeeComponent";
 import ViewEmployeeComponent from "./components/ViewEmployeeComponent";
 
 function App() {
-  const [data, setData] = useState("http://localhost:8080/api/v1/employees");
+  const [data, setData] = useState("https://thebackend.uc.r.appspot.com/api/v1/employees");
   return (
     <div id="appDiv">
       <shareAPISContext.Provider value={{ data, setData }}>

@@ -5,7 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import "./style.css";
 
 function UpdateEmployeeComponent() {
-  const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/v1/employees";
+  const EMPLOYEE_API_BASE_URL = "https://thebackend.uc.r.appspot.com/api/v1/employees";
   const navigate = useNavigate();
   const goBack = () => {
     navigate("/");

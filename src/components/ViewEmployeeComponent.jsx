@@ -15,7 +15,7 @@ function ViewEmployeeComponent() {
     emailId: "",
   };
   const [data, setData] = useState(initialValues);
-  const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/v1/employees";
+  const EMPLOYEE_API_BASE_URL = "https://thebackend.uc.r.appspot.com/api/v1/employees";
 
   const getEmployeeById = async (id) => {
     setLoading(true);
