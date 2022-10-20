@@ -118,6 +118,7 @@ export const ListEmployeeFunctionalComponent = () => {
             <th className="text-center">Last Name</th>
             <th className="text-center">Email Id</th>
             <th className="text-center">Actions</th>
+            <th>Notes</th>
           </tr>
         </thead>
         <tbody>{DisplayData}</tbody>
